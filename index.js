@@ -17,18 +17,22 @@ if(!Fs.pathExistsSync(condition)) {
 
     console.log('installing package');
 
-    Fs.moveSync(source, root, {mkdirp: true}, function(err) {
+    Fs.moveSync(source, root, { overwrite: true });
 
-        if(err) {
+    console.log('package installed successfully');
 
-            console.log(err);
-            throw new Error('error when installing package');
-
-        } else {
-
-            console.log('package installed successfully');
-        }
-
-    });
+    // {mkdirp: true}, function(err) {
+    //
+    //     if(err) {
+    //
+    //         console.log(err);
+    //         throw new Error('error when installing package');
+    //
+    //     } else {
+    //
+    //         console.log('package installed successfully');
+    //     }
+    //
+    // });
 }
 console.log('33333333333333333333333333333333');
