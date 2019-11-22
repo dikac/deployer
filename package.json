@@ -1,6 +1,6 @@
 {
   "name": "dist-mover",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "move dist folder to root",
   "main": "index.js",
   "dependencies": {},
