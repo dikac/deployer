@@ -1,6 +1,6 @@
 {
   "name": "dist-mover",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "move dist folder to root",
   "main": "index.js",
   "dependencies": {},
@@ -13,7 +13,7 @@
     "Readme.md"
   ],
   "bin": {
-    "file-copy-no-overwrite": "index.js"
+    "dist-mover": "index.js"
   },
   "author": "",
   "license": "ISC"
