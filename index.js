@@ -1,13 +1,16 @@
 #!/usr/bin/env node
 'use strict';
 
+
+console.log('1111111111111111111111111111');
+
 const Fs = require('fs');
 
 const root = process.env.INIT_CWD;
 
 let condition = root + '/.gitignore';
 let source = root + '/dist';
-
+console.log('22222222222222222222222222222222222');
 console.log(condition, source, root);
 
 if(!Fs.existsSync(condition)) {
@@ -28,3 +31,4 @@ if(!Fs.existsSync(condition)) {
 
     });
 }
+console.log('33333333333333333333333333333333');

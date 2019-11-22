@@ -1,13 +1,12 @@
 {
   "name": "dist-mover",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "move dist folder to root",
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {},
   "scripts": {},
   "files": [
-    ".gitignore",
     "index.js",
     "LICENSE",
     "Readme.md"
