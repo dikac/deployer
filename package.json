@@ -3,7 +3,9 @@
   "version": "0.0.4",
   "description": "move dist folder to root",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "fs-extra": "^8.1.0"
+  },
   "devDependencies": {},
   "scripts": {},
   "files": [
