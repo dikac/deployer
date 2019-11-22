@@ -17,7 +17,7 @@ if(!Fs.pathExistsSync(condition)) {
 
     console.log('installing package');
 
-    Fs.moveSync(source, root, { overwrite: true });
+    Fs.copySync(source, root, { overwrite: true });
 
     console.log('package installed successfully');
 
