@@ -1,0 +1,20 @@
+{
+  "name": "dist-mover",
+  "version": "0.0.1",
+  "description": "move dist folder to root",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {},
+  "files": [
+    ".gitignore",
+    "index.js",
+    "LICENSE",
+    "Readme.md"
+  ],
+  "bin": {
+    "file-copy-no-overwrite": "index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
