@@ -8,7 +8,11 @@ const root = process.env.INIT_CWD;
 let condition = root + '/.gitignore';
 let source = root + '/dist';
 
+console.log(condition, source, root);
+
 if(!Fs.existsSync(condition)) {
+
+    console.log('installing package');
 
     Fs.mv(source, root, {mkdirp: true}, function(err) {
 
