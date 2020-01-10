@@ -25,9 +25,9 @@ if(!Fs.pathExistsSync(condition)) {
 
     (async ()=> {
 
-        for await (const file of klaw(root + source)) {
+        for await (const file of klaw(root + source, {nodir:true})) {
 
-            const log = logUpdate.create(process.stdout, {nodir:true});
+            const log = logUpdate.create(process.stdout);
 
             const relative = file.path.substr((root + source).length);
             console.log(file.path);
