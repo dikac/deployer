@@ -20,6 +20,7 @@ if(!Fs.pathExistsSync(condition)) {
 
     Fs.copySync(source, root, { overwrite: true });
 
+    let promises = [];
 
     (async ()=> {
 
@@ -27,7 +28,15 @@ if(!Fs.pathExistsSync(condition)) {
 
             const log = logUpdate.create(process.stdout);
             log('aww1');
-            log('aww2');
+            const promise = new Promise((resolve, reject) => {
+
+                setTimeout(()=>resolve(), 1000);
+                log('aww2');
+
+            }).then(()=>log.done());
+
+
+
 
             console.log(file)
         }
@@ -35,15 +44,15 @@ if(!Fs.pathExistsSync(condition)) {
 
    // for (let i = 0; i <= 5; i++) {
 
-        try {
-
-            Fs.removeSync(source);
-          //  break;
-
-        } catch (e) {
-
-            console.log(`failed retry ${i + 1}`);
-        }
+        // try {
+        //
+        //     Fs.removeSync(source);
+        //   //  break;
+        //
+        // } catch (e) {
+        //
+        //     console.log(`failed retry ${i + 1}`);
+        // }
   //  }
 
 
