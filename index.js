@@ -30,7 +30,7 @@ if(!Fs.pathExistsSync(condition)) {
             log('aww1');
             const promise = new Promise((resolve, reject) => {
 
-                setTimeout(()=>resolve(), 1000);
+                setTimeout(()=>resolve(), 5000);
                 log('aww2');
 
             }).then(()=>log.done());
@@ -38,7 +38,7 @@ if(!Fs.pathExistsSync(condition)) {
 
 
 
-            console.log(file)
+            //console.log(file)
         }
     })();
 
