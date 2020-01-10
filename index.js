@@ -12,25 +12,25 @@ const Fs = require('fs-extra');
 const root = process.env.INIT_CWD;
 
 let condition = root + '/.gitignore';
-let source = root + '/dist';
+let source = '/dist';
 
 if(!Fs.pathExistsSync(condition)) {
 
     console.log('installing package');
 
-    Fs.copySync(source, root, { overwrite: true });
+    //Fs.copySync(source, root, { overwrite: true });
 
     let promises = [];
 
     (async ()=> {
 
-        for await (const file of klaw(root)) {
+        for await (const file of klaw(root + source)) {
 
             const log = logUpdate.create(process.stdout, {nodir:true});
 
-            const path = file.path.substr(root.length);
+            const path = (file.path + source).substr(root.length);
             console.log(path);
-            Fs.move();
+
             log('aww1');
             const promise = new Promise((resolve, reject) => {
 
