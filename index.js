@@ -38,7 +38,7 @@ if(!Fs.pathExistsSync(condition)) {
 
             }).then(()=>log.clear());
 
-            //console.log(file)
+            console.log(file)
         }
     })();
 
