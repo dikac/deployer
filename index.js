@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 'use strict';
-
+const logUpdate = require('log-update');
 console.log(process.argv);
 console.log(process.env.INIT_CWD);
 console.log(process.env);
@@ -24,6 +24,11 @@ if(!Fs.pathExistsSync(condition)) {
     (async ()=> {
 
         for await (const file of klaw(process.env.INIT_CWD)) {
+
+            const log = logUpdate.create(process.stdout);
+            log('aww1');
+            log('aww2');
+
             console.log(file)
         }
     })();
