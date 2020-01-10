@@ -22,38 +22,41 @@ if(!Fs.pathExistsSync(condition)) {
     //Fs.copySync(source, root, { overwrite: true });
 
     let promises = [];
+    const files = klawSync('/some/dir', {nodir: true});
 
-    (async ()=> {
+    console.log(files);
 
-        for await (const file of klaw(root + source, {nodir:true})) {
-
-            const log = logUpdate.create(process.stdout);
-
-            const relative = file.path.substr((root + source).length);
-            const src = file.path;
-            const dest = root + destination + relative;
-
-            //console.log(src);
-            //console.log(dest);
-
-            log(`installing:${src}`);
-
-            promises.push(Fs.move(src, dest, { overwrite: true }).then(function () {
-
-                log.clear();
-
-            }).catch(e=>{
-                log.clear();
-                console.log(e);
-            }));
-
-           // console.log(file)
-        }
-    })().then(()=>{
-
-        console.log(promises);
-        Promise.all(promises);
-    });
+    // (async ()=> {
+    //
+    //     for await (const file of klaw(root + source, {nodir:true})) {
+    //
+    //         const log = logUpdate.create(process.stdout);
+    //
+    //         const relative = file.path.substr((root + source).length);
+    //         const src = file.path;
+    //         const dest = root + destination + relative;
+    //
+    //         //console.log(src);
+    //         //console.log(dest);
+    //
+    //         log(`installing:${src}`);
+    //
+    //         promises.push(Fs.move(src, dest, { overwrite: true }).then(function () {
+    //
+    //             log.clear();
+    //
+    //         }).catch(e=>{
+    //             log.clear();
+    //             console.log(e);
+    //         }));
+    //
+    //        // console.log(file)
+    //     }
+    // })().then(()=>{
+    //
+    //     console.log(promises);
+    //     Promise.all(promises);
+    // });
 
 
    // for (let i = 0; i <= 5; i++) {
