@@ -28,7 +28,7 @@ if(!Fs.pathExistsSync(condition)) {
 
             const log = logUpdate.create(process.stdout, {nodir:true});
 
-            const path = (file.path + source).substr(root.length);
+            const path = file.path.substr((root + source).length);
             console.log(path);
 
             log('aww1');
