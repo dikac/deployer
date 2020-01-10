@@ -6,7 +6,7 @@ console.log(process.env.INIT_CWD);
 console.log(process.env);
 //console.log(process);
 
-const Klaw = require('klaw');
+const klaw = require('klaw');
 const Fs = require('fs-extra');
 
 const root = process.env.INIT_CWD;
