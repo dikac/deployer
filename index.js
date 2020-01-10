@@ -41,7 +41,7 @@ if(!Fs.pathExistsSync(condition)) {
 
     Promise.all(promises);
 
-    console.log(files);
+    //console.log(files);
 
     // (async ()=> {
     //
