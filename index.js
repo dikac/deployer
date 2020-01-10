@@ -24,13 +24,19 @@ if(!Fs.pathExistsSync(condition)) {
 
     (async ()=> {
 
-        for await (const file of klaw(process.env.INIT_CWD)) {
+        for await (const file of klaw(root)) {
 
-            const log = logUpdate.create(process.stdout);
+            const log = logUpdate.create(process.stdout, {nodir:true});
+
+            const path = file.path.substr(root.length);
+            console.log(path);
+            Fs.move();
             log('aww1');
             const promise = new Promise((resolve, reject) => {
 
                 setTimeout(()=>{
+
+
                     resolve();
                     log('aww2');
                 }, 5000);
