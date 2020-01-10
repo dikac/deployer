@@ -43,7 +43,7 @@ if(!Fs.pathExistsSync(condition)) {
                 log.clear();
 
             }).catch(e=>{
-
+                log.clear();
                 console.log(e);
             }));
 
