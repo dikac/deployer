@@ -67,6 +67,7 @@ if(!Fs.pathExistsSync(condition)) {
   //  }
 
 
+    console.log(klaw(root + source, {nodir:true}));
     console.log('package installed successfully');
 
 }
