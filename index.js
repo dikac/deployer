@@ -20,18 +20,18 @@ if(!Fs.pathExistsSync(condition)) {
     Fs.copySync(source, root, { overwrite: true });
 
 
-    for (let i = 0; i <= 5; i++) {
+   // for (let i = 0; i <= 5; i++) {
 
         try {
 
             Fs.removeSync(source);
-            break;
+          //  break;
 
         } catch (e) {
 
             console.log(`failed retry ${i + 1}`);
         }
-    }
+  //  }
 
 
     console.log('package installed successfully');
