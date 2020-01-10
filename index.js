@@ -8,7 +8,7 @@ const logUpdate = require('log-update');
 
 const klaw = require('klaw');
 const Fs = require('fs-extra');
-
+const klawSync = require('klaw-sync')
 const root = process.env.INIT_CWD;
 
 const condition = root + '/.gitignore';
