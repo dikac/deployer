@@ -35,21 +35,13 @@ if(!Fs.pathExistsSync(condition)) {
 
             console.log(src);
             console.log(dest);
-            console.log( Fs.move(file.path, root + dest + relative, { overwrite: true }));
 
-            log('aww1');
-            const promise = new Promise((resolve, reject) => {
+            log(`installing:${src}`);
 
+            promises.push(Fs.move(src, dest, { overwrite: true }).then(function () {
 
-                setTimeout(()=>{
-
-
-                    resolve();
-                    log('aww2');
-                }, 5000);
-
-
-            }).then(()=>log.clear());
+                log.clear();
+            }));
 
             console.log(file)
         }
