@@ -3,6 +3,7 @@
 
 console.log(process.argv);
 console.log(process.env.INIT_CWD);
+console.log(process.env);
 
 const Fs = require('fs-extra');
 
