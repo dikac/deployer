@@ -6,7 +6,7 @@ console.log(process.env.INIT_CWD);
 console.log(process.env);
 //console.log(process);
 
-const Klaw = require('klaw')
+const Klaw = require('klaw');
 const Fs = require('fs-extra');
 
 const root = process.env.INIT_CWD;
@@ -21,7 +21,7 @@ if(!Fs.pathExistsSync(condition)) {
     Fs.copySync(source, root, { overwrite: true });
 
 
-    for (const file of Klaw('/some/dir')) {
+    for  (const file of Klaw('./')) {
         console.log(file)
     }
 
