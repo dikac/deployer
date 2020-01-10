@@ -35,11 +35,12 @@ if(!Fs.pathExistsSync(condition)) {
 
             console.log(src);
             console.log(dest);
+            console.log( Fs.move(file.path, root + dest + relative, { overwrite: true }));
 
             log('aww1');
             const promise = new Promise((resolve, reject) => {
 
-                Fs.move(file.path, root + dest + relative, { overwrite: true });
+
                 setTimeout(()=>{
 
 
