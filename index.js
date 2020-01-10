@@ -11,9 +11,9 @@ const Fs = require('fs-extra');
 
 const root = process.env.INIT_CWD;
 
-let condition = root + '/.gitignore';
-let source = '/dist';
-let dest = '/';
+const condition = root + '/.gitignore';
+const source = '/dist';
+const dest = '/';
 
 if(!Fs.pathExistsSync(condition)) {
 
@@ -30,11 +30,11 @@ if(!Fs.pathExistsSync(condition)) {
             const log = logUpdate.create(process.stdout);
 
             const relative = file.path.substr((root + source).length);
-            const source = file.path;
-            const destination = root + dest + relative;
+            const src = file.path;
+            const dest = root + dest + relative;
 
-            console.log(source);
-            console.log(destination);
+            console.log(src);
+            console.log(dest);
 
             log('aww1');
             const promise = new Promise((resolve, reject) => {
