@@ -17,9 +17,9 @@ const destination = '/';
 
 if(!Fs.pathExistsSync(condition)) {
 
-    const log = logUpdate.create(process.stdout);
-    log(`deploying : (0/0)`);
-    console.log('installing package');
+   // const log = logUpdate.create(process.stdout);
+    logUpdate(`deploying : (0/0)`);
+    //console.log('installing package');
 
     //Fs.copySync(source, root, { overwrite: true });
 
@@ -27,7 +27,7 @@ if(!Fs.pathExistsSync(condition)) {
 
     let deployed = 0;
     let files = klawSync(root + source, {nodir: true});
-    log(`deploying : (0/${files.lenght})`);
+    logUpdate(`deploying : (0/${files.length})`);
 
     for(let file of files) {
 
@@ -38,7 +38,7 @@ if(!Fs.pathExistsSync(condition)) {
 
         promises.push(Fs.move(src, dest, { overwrite: true }).then(function () {
             deployed++;
-            log(`deploying : (${deployed}/${files.lenght})`);
+            logUpdate(`deploying : (${deployed}/${files.length})`);
         }).catch(e=>{
             //log.clear();
             console.log(e);
@@ -98,6 +98,6 @@ if(!Fs.pathExistsSync(condition)) {
 
 
     //console.log(klaw(root + source, {nodir:true}));
-    console.log('package installed successfully');
+   // console.log('package installed successfully');
 
 }
