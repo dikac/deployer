@@ -70,7 +70,7 @@ if(!Fs.pathExistsSync(condition)) {
 
     let success = 0;
 
-    logUpdate(`deploying : (0/${files.length})`);
+    logUpdate(`deploying`);
 
     let error = null;
 
@@ -84,6 +84,7 @@ if(!Fs.pathExistsSync(condition)) {
         if(total === null) {
 
             total = files;
+            logUpdate(`deploying : (0/${total})`);
         }
 
         for(let file of files) {
