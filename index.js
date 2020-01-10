@@ -49,9 +49,12 @@ if(!Fs.pathExistsSync(condition)) {
 
            // console.log(file)
         }
-    })();
-    console.log(promises);
-    Promise.all(promises);
+    })().then(()=>{
+
+        console.log(promises);
+        Promise.all(promises);
+    });
+
 
    // for (let i = 0; i <= 5; i++) {
 
