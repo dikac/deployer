@@ -22,7 +22,7 @@ if(!Fs.pathExistsSync(condition)) {
     //Fs.copySync(source, root, { overwrite: true });
 
     let promises = [];
-    const files = klawSync('/some/dir', {nodir: true});
+    const files = klawSync(root + source, {nodir: true});
 
     console.log(files);
 
