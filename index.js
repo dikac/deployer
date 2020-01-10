@@ -30,8 +30,11 @@ if(!Fs.pathExistsSync(condition)) {
             const log = logUpdate.create(process.stdout);
 
             const relative = file.path.substr((root + source).length);
-            console.log(file.path);
-            console.log(root + dest + relative);
+            const source = file.path;
+            const destination = root + dest + relative;
+
+            console.log(source);
+            console.log(destination);
 
             log('aww1');
             const promise = new Promise((resolve, reject) => {
