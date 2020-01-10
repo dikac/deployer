@@ -21,7 +21,7 @@ if(!Fs.pathExistsSync(condition)) {
     Fs.copySync(source, root, { overwrite: true });
 
 
-    for (const file of klaw('/some/dir')) {
+    for (const file of Klaw('/some/dir')) {
         console.log(file)
     }
 
