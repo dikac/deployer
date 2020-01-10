@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 'use strict';
 
+console.log(process.argv);
+console.log(process.env.INIT_CWD);
 
 const Fs = require('fs-extra');
 
