@@ -13,6 +13,7 @@ const root = process.env.INIT_CWD;
 
 let condition = root + '/.gitignore';
 let source = '/dist';
+let dest = '/';
 
 if(!Fs.pathExistsSync(condition)) {
 
@@ -28,12 +29,14 @@ if(!Fs.pathExistsSync(condition)) {
 
             const log = logUpdate.create(process.stdout, {nodir:true});
 
-            const path = file.path.substr((root + source).length);
-            console.log(path);
+            const relative = file.path.substr((root + source).length);
+            console.log(file.path);
+            console.log(root + dest + relative);
 
             log('aww1');
             const promise = new Promise((resolve, reject) => {
 
+                Fs.move(file.path, root + dest + relative, { overwrite: true });
                 setTimeout(()=>{
 
 
