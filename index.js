@@ -23,7 +23,7 @@ if(!Fs.pathExistsSync(condition)) {
 
     (async ()=> {
 
-        for await (const file of klaw('/some/dir')) {
+        for await (const file of klaw(__dirname)) {
             console.log(file)
         }
     })();
