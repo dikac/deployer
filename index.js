@@ -45,7 +45,7 @@ if(!Fs.pathExistsSync(condition)) {
         }));
     }
 
-    console.log(promises);
+    //console.log(promises);
     Promise.all(promises);
 
     //console.log(files);
