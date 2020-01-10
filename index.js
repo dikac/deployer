@@ -41,7 +41,11 @@ if(!Fs.pathExistsSync(condition)) {
             promises.push(Fs.move(src, dest, { overwrite: true }).then(function () {
 
                 log.clear();
-            }));
+
+            })).catch(e=>{
+
+                console.log(e);
+            });
 
            // console.log(file)
         }
