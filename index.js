@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 'use strict';
 const logUpdate = require('log-update');
-console.log(process.argv);
-console.log(process.env.INIT_CWD);
-console.log(process.env);
+//console.log(process.argv);
+//console.log(process.env.INIT_CWD);
+//console.log(process.env);
 //console.log(process);
 
 const klaw = require('klaw');
@@ -42,10 +42,10 @@ if(!Fs.pathExistsSync(condition)) {
 
                 log.clear();
 
-            })).catch(e=>{
+            }).catch(e=>{
 
                 console.log(e);
-            });
+            }));
 
            // console.log(file)
         }
