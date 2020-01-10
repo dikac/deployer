@@ -33,7 +33,7 @@ if(!Fs.pathExistsSync(condition)) {
                 setTimeout(()=>resolve(), 5000);
                 log('aww2');
 
-            }).then(()=>log.done());
+            }).then(()=>log.clear());
 
 
 
