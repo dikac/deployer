@@ -13,7 +13,7 @@ const root = process.env.INIT_CWD;
 
 const condition = root + '/.gitignore';
 const source = '/dist';
-const dest = '/';
+const destination = '/';
 
 if(!Fs.pathExistsSync(condition)) {
 
@@ -31,7 +31,7 @@ if(!Fs.pathExistsSync(condition)) {
 
             const relative = file.path.substr((root + source).length);
             const src = file.path;
-            const dest = root + dest + relative;
+            const dest = root + destination + relative;
 
             console.log(src);
             console.log(dest);
