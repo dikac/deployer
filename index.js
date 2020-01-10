@@ -15,38 +15,108 @@ const condition = root + '/.gitignore';
 const source = '/dist';
 const destination = '/';
 
-if(!Fs.pathExistsSync(condition)) {
+class Success  {
 
-   // const log = logUpdate.create(process.stdout);
-    logUpdate(`deploying : (0/0)`);
-    //console.log('installing package');
+    _success = 0;
+    total = 0;
 
-    //Fs.copySync(source, root, { overwrite: true });
+    constructor(total) {
+
+        this.total = total;
+
+    }
+
+    success() {
+        this._success++;
+        logUpdate(`deploying : (${this._success}/${this.total})`);
+    }
+
+    remain() {
+
+        return this.total - this._success;
+    }
+
+};
+
+
+function Move(source, destination, success) {
 
     let promises = [];
 
-    let deployed = 0;
-    let files = klawSync(root + source, {nodir: true});
+
+
+    return promises;
+}
+
+function Loop(source, destination, success, retry) {
+
+    Promise.all(Move(source, destination, success)).then(()=>{
+
+
+    }).catch((e)=>{
+
+        if(retry === 0) {
+
+            throw e;
+
+        } else {
+
+            return Loop(source, destination, success, --retry);
+        }
+    });
+}
+
+if(!Fs.pathExistsSync(condition)) {
+
+    let success = 0;
+
     logUpdate(`deploying : (0/${files.length})`);
 
-    for(let file of files) {
+    let error = null;
 
-        const relative = file.path.substr((root + source).length);
-        const src = file.path;
-        const dest = root + destination + relative;
+    let total = null;
 
+    for (let i = 0; i <= 5; i++) {
 
-        promises.push(Fs.move(src, dest, { overwrite: true }).then(function () {
-            deployed++;
-            logUpdate(`deploying : (${deployed}/${files.length})`);
-        }).catch(e=>{
-            //log.clear();
-            console.log(e);
-        }));
+        error = null;
+        let files = klawSync(root + source, {nodir: true});
+
+        if(total === null) {
+
+            total = files;
+        }
+
+        for(let file of files) {
+
+            const relative = file.path.substr((root + source).length);
+            const src = file.path;
+            const dest = root + destination + relative;
+
+            try {
+
+                Fs.moveSync(src, dest, { overwrite: true });
+                success++;
+                logUpdate(`deploying : (${success}/${total})`);
+
+            } catch (e) {
+
+                error = e;
+            }
+        }
+
+    }
+
+    if(error) {
+
+        throw error;
+
+    } else {
+
+        logUpdate('deployed');
     }
 
     //console.log(promises);
-    Promise.all(promises);
+
 
     //console.log(files);
 
