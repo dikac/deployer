@@ -17,24 +17,30 @@ const destination = '/';
 
 if(!Fs.pathExistsSync(condition)) {
 
+    const log = logUpdate.create(process.stdout);
+    log(`deploying : (0/0)`);
     console.log('installing package');
 
     //Fs.copySync(source, root, { overwrite: true });
 
     let promises = [];
 
+    let deployed = 0;
     let files = klawSync(root + source, {nodir: true});
+    log(`deploying : (0/${files.lenght})`);
+
     for(let file of files) {
 
         const relative = file.path.substr((root + source).length);
         const src = file.path;
         const dest = root + destination + relative;
-        const log = logUpdate.create(process.stdout);
+
 
         promises.push(Fs.move(src, dest, { overwrite: true }).then(function () {
-            log.clear();
+            deployed++;
+            log(`deploying : (${deployed}/${files.lenght})`);
         }).catch(e=>{
-            log.clear();
+            //log.clear();
             console.log(e);
         }));
     }
