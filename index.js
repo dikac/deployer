@@ -22,7 +22,24 @@ if(!Fs.pathExistsSync(condition)) {
     //Fs.copySync(source, root, { overwrite: true });
 
     let promises = [];
-    const files = klawSync(root + source, {nodir: true});
+
+    let files = klawSync(root + source, {nodir: true});
+    for(let file of files) {
+
+        const relative = file.path.substr((root + source).length);
+        const src = file.path;
+        const dest = root + destination + relative;
+        const log = logUpdate.create(process.stdout);
+
+        promises.push(Fs.move(src, dest, { overwrite: true }).then(function () {
+            log.clear();
+        }).catch(e=>{
+            log.clear();
+            console.log(e);
+        }));
+    }
+
+    Promise.all(promises);
 
     console.log(files);
 
