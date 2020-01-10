@@ -33,8 +33,8 @@ if(!Fs.pathExistsSync(condition)) {
             const src = file.path;
             const dest = root + destination + relative;
 
-            console.log(src);
-            console.log(dest);
+            //console.log(src);
+            //console.log(dest);
 
             log(`installing:${src}`);
 
@@ -43,7 +43,7 @@ if(!Fs.pathExistsSync(condition)) {
                 log.clear();
             }));
 
-            console.log(file)
+           // console.log(file)
         }
     })();
 
