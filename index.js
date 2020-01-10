@@ -39,6 +39,7 @@ if(!Fs.pathExistsSync(condition)) {
         }));
     }
 
+    console.log(promises);
     Promise.all(promises);
 
     //console.log(files);
@@ -90,7 +91,7 @@ if(!Fs.pathExistsSync(condition)) {
   //  }
 
 
-    console.log(klaw(root + source, {nodir:true}));
+    //console.log(klaw(root + source, {nodir:true}));
     console.log('package installed successfully');
 
 }
