@@ -30,17 +30,19 @@ if(!Fs.pathExistsSync(condition)) {
             log('aww1');
             const promise = new Promise((resolve, reject) => {
 
-                setTimeout(()=>resolve(), 5000);
-                log('aww2');
+                setTimeout(()=>{
+                    resolve();
+                    log('aww2');
+                }, 5000);
+
 
             }).then(()=>log.clear());
-
-
-
 
             //console.log(file)
         }
     })();
+
+    Promise.all(promises);
 
    // for (let i = 0; i <= 5; i++) {
 
