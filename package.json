@@ -1,10 +1,13 @@
 {
-  "name": "dist-mover",
-  "version": "0.0.9",
-  "description": "move dist folder to root",
+  "name": "@dikac/deployer",
+  "version": "0.1.0",
+  "description": "move directory on deployment",
   "main": "index.js",
   "dependencies": {
-    "fs-extra": "^8.1.0"
+    "commander": "^4.1.0",
+    "fs-extra": "^8.1.0",
+    "klaw-sync": "^6.0.0",
+    "log-update": "^3.3.0"
   },
   "devDependencies": {},
   "scripts": {},

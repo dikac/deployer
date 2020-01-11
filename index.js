@@ -1,35 +1,95 @@
 #!/usr/bin/env node
 'use strict';
 
-
 const Fs = require('fs-extra');
 
+// Arguments
+const commander = require('commander');
+const program = new commander.Command();
+
+program.storeOptionsAsProperties(false);
+
+program
+    .command('condition', 'file/directory condition for deployment, deployment running if file does not exist')
+    .command('source', 'directory source')
+    .command('destination', 'directory destination')
+    .parse(process.argv);
+
+
+program.args = program.args.map(argument=>{
+
+    if(['/','\\'].includes(argument)) {
+
+        return '';
+    }
+
+    return argument;
+});
+
+const [condition, source, destination] = program.args;
+
+
+const klawSync = require('klaw-sync');
 const root = process.env.INIT_CWD;
 
-let condition = root + '/.gitignore';
-let source = root + '/dist';
 
-if(!Fs.pathExistsSync(condition)) {
+const logUpdate = require('log-update');
 
-    console.log('installing package');
+if(!Fs.pathExistsSync(root + condition)) {
 
-    Fs.copySync(source, root, { overwrite: true });
+    let success = 0;
 
+    logUpdate(`deploying`);
+
+    let error = null;
+
+    let total = null;
 
     for (let i = 0; i <= 5; i++) {
 
-        try {
+        error = null;
 
-            Fs.removeSync(source);
-            break;
+        let files = klawSync(root + source, {nodir: true});
 
-        } catch (e) {
+        if(total === null) {
 
-            console.log(`failed retry ${i + 1}`);
+            total = files;
+            logUpdate(`deploying : (0/${total})`);
+        }
+
+        for(let file of files) {
+
+            const relative = file.path.substr((root + source).length);
+            const src = file.path;
+            const dest = root + destination + relative;
+
+            try {
+
+                Fs.moveSync(src, dest, { overwrite: true });
+                success++;
+                logUpdate(`deploying : (${success}/${total})`);
+
+            } catch (e) {
+
+                error = e;
+            }
+        }
+
+        if(!error) {
+
+            break ;
         }
     }
 
+    if(error) {
 
-    console.log('package installed successfully');
+        throw error;
 
+    } else {
+
+        logUpdate(`deploying : cleaning up`);
+        Fs.removeSync(root + source);
+
+        logUpdate('deployed');
+    }
 }
