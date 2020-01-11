@@ -35,8 +35,6 @@ const root = process.env.INIT_CWD;
 
 const logUpdate = require('log-update');
 
-console.log(root + condition);
-
 if(!Fs.pathExistsSync(root + condition)) {
 
     let success = 0;
@@ -94,4 +92,8 @@ if(!Fs.pathExistsSync(root + condition)) {
 
         logUpdate('deployed');
     }
+
+} else {
+
+    logUpdate('development')
 }
