@@ -1,12 +1,23 @@
 #!/usr/bin/env node
 'use strict';
 const logUpdate = require('log-update');
-console.log(process.argv);
+//console.log(process.argv);
 //console.log(process.env.INIT_CWD);
 //console.log(process.env);
 //console.log(process);
 
 const Fs = require('fs-extra');
+const commander = require('commander');
+const program = new commander.Command();
+
+program
+    .command('condition', 'file/directory condition for deployment, deployment running if file does not exist')
+    .command('source', 'directory source')
+    .command('destination', 'directory destination')
+    .parse(process.argv);
+
+console.log(program.opts());
+
 const klawSync = require('klaw-sync');
 const root = process.env.INIT_CWD;
 

@@ -4,6 +4,7 @@
   "description": "move dist folder to root",
   "main": "index.js",
   "dependencies": {
+    "commander": "^4.1.0",
     "fs-extra": "^8.1.0",
     "klaw": "^3.0.0",
     "klaw-sync": "^6.0.0",
