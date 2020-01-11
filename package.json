@@ -17,7 +17,7 @@
     "Readme.md"
   ],
   "bin": {
-    "dist-mover": "index.js"
+    "deployer": "index.js"
   },
   "author": "",
   "license": "ISC"
