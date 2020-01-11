@@ -20,20 +20,26 @@ program
     .command('destination', 'directory destination')
     .parse(process.argv);
 
-console.log(program.opts());
-console.log(program);
-//
+
+program.args = program.args.map(argument=>{
+
+    if(['/','\\'].includes(argument)) {
+
+        return '';
+    }
+
+    return argument;
+});
 
 
 const klawSync = require('klaw-sync');
 const root = process.env.INIT_CWD;
 
-const condition = root + '/.gitignore';
-const source = '/dist';
-const destination = '/';
+const [condition, source, destination] = program.args;
 
+console.log(condition, source, destination);
 
-if(!Fs.pathExistsSync(condition)) {
+if(!Fs.pathExistsSync(root + condition)) {
 
     let success = 0;
 
