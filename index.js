@@ -12,7 +12,7 @@ const Fs = require('fs-extra');
 const commander = require('commander');
 const program = new commander.Command();
 
-program.storeOptionsAsProperties(false)
+program.storeOptionsAsProperties(false);
 
 program
     .command('condition', 'file/directory condition for deployment, deployment running if file does not exist')
@@ -21,6 +21,7 @@ program
     .parse(process.argv);
 
 console.log(program.opts());
+console.log(program);
 //
 
 
