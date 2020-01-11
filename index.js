@@ -92,6 +92,9 @@ if(!Fs.pathExistsSync(root + condition)) {
 
     } else {
 
+        logUpdate(`deploying : cleaning up`);
+        Fs.removeSync(root + source);
+
         logUpdate('deployed');
     }
 
