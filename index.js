@@ -53,7 +53,7 @@ if(!Fs.pathExistsSync(root + condition)) {
 
         if(total === null) {
 
-            total = files;
+            total = files.length;
             logUpdate(`deploying : (0/${total})`);
         }
 
