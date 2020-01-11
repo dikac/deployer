@@ -7,8 +7,12 @@ const logUpdate = require('log-update');
 //console.log(process);
 
 const Fs = require('fs-extra');
+
+// Arguments
 const commander = require('commander');
 const program = new commander.Command();
+
+program.storeOptionsAsProperties(false)
 
 program
     .command('condition', 'file/directory condition for deployment, deployment running if file does not exist')
@@ -17,6 +21,8 @@ program
     .parse(process.argv);
 
 console.log(program.opts());
+//
+
 
 const klawSync = require('klaw-sync');
 const root = process.env.INIT_CWD;
