@@ -35,6 +35,30 @@ const root = process.env.INIT_CWD;
 
 const logUpdate = require('log-update');
 
+// Write output but don't hide the cursor
+const log = logUpdate.create(process.stdout, {
+    showCursor: true
+});
+
+function write(success, total, error, retry) {
+
+    let message = [];
+
+    if(retry > 0) {
+
+        message.push(`retry : ${retry}`);
+    }
+
+    message.push(`deploying : ${success}/${total}`);
+
+    if(error > 0) {
+
+        message.push(`error : ${error}`);
+    }
+
+    logUpdate(message.join("\n"));
+}
+
 if(!Fs.pathExistsSync(root + condition)) {
 
     let success = 0;
@@ -42,6 +66,7 @@ if(!Fs.pathExistsSync(root + condition)) {
     logUpdate(`deploying`);
 
     let error = null;
+    let errorNumber = 0;
 
     let total = null;
 
@@ -54,7 +79,7 @@ if(!Fs.pathExistsSync(root + condition)) {
         if(total === null) {
 
             total = files.length;
-            logUpdate(`deploying : (0/${total})`);
+            write(success, total, errorNumber, i);
         }
 
         for(let file of files) {
@@ -67,10 +92,11 @@ if(!Fs.pathExistsSync(root + condition)) {
 
                 Fs.moveSync(src, dest, { overwrite: true });
                 success++;
-                logUpdate(`deploying : (${success}/${total})`);
+                write(success, total, errorNumber, i);
 
             } catch (e) {
 
+                errorNumber++;
                 error = e;
             }
         }
@@ -83,11 +109,11 @@ if(!Fs.pathExistsSync(root + condition)) {
 
     if(error) {
 
-        throw error;
+        throw new Error(error);
 
     } else {
 
-        logUpdate(`deploying : cleaning up`);
+        logUpdate(`cleaning up`);
         Fs.removeSync(root + source);
 
         logUpdate('deployed');
