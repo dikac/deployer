@@ -1,9 +1,6 @@
 #!/usr/bin/env node
 'use strict';
 
-console.log('process.env.INIT_CWD================================');
-console.log(process.argv);
-console.log(process.env.INIT_CWD);
 const Fs = require('fs-extra');
 
 // Arguments
@@ -18,7 +15,6 @@ program
     .command('destination', 'directory destination')
     .parse(process.argv);
 
-
 program.args = program.args.map(argument=>{
 
     if(['/','\\'].includes(argument)) {
@@ -31,12 +27,8 @@ program.args = program.args.map(argument=>{
 
 const [condition, source, destination] = program.args;
 
-
 const klawSync = require('klaw-sync');
 const root = process.env.INIT_CWD;
-console.log('process.env.INIT_CWD================================');
-console.log(root);
-
 
 const logUpdate = require('log-update');
 
@@ -66,49 +58,53 @@ function write(success, total, error, retry) {
 
 if(!Fs.pathExistsSync(root + condition)) {
 
-    let success = 0;
-
-    logUpdate(`deploying`);
-
     let error = null;
-    let errorNumber = 0;
 
-    let total = null;
+    if(Fs.pathExistsSync(root + source)) {
 
-    for (let i = 0; i <= 5; i++) {
+        let success = 0;
 
-        error = null;
+        logUpdate(`deploying`);
 
-        let files = klawSync(root + source, {nodir: true});
+        let errorNumber = 0;
 
-        if(total === null) {
+        let total = null;
 
-            total = files.length;
-            write(success, total, errorNumber, i);
-        }
+        for (let i = 0; i <= 5; i++) {
 
-        for(let file of files) {
+            error = null;
 
-            const relative = file.path.substr((root + source).length);
-            const src = file.path;
-            const dest = root + destination + relative;
+            let files = klawSync(root + source, {nodir: true});
 
-            try {
+            if(total === null) {
 
-                Fs.moveSync(src, dest, { overwrite: true });
-                success++;
+                total = files.length;
                 write(success, total, errorNumber, i);
-
-            } catch (e) {
-
-                errorNumber++;
-                error = e;
             }
-        }
 
-        if(!error) {
+            for(let file of files) {
 
-            break ;
+                const relative = file.path.substr((root + source).length);
+                const src = file.path;
+                const dest = root + destination + relative;
+
+                try {
+
+                    Fs.moveSync(src, dest, { overwrite: true });
+                    success++;
+                    write(success, total, errorNumber, i);
+
+                } catch (e) {
+
+                    errorNumber++;
+                    error = e;
+                }
+            }
+
+            if(!error) {
+
+                break ;
+            }
         }
     }
 
@@ -118,8 +114,11 @@ if(!Fs.pathExistsSync(root + condition)) {
 
     } else {
 
-        logUpdate(`cleaning up`);
-        Fs.removeSync(root + source);
+        if(Fs.pathExistsSync(root + source)) {
+
+            logUpdate(`cleaning up`);
+            Fs.removeSync(root + source);
+        }
 
         logUpdate('deployed');
     }
