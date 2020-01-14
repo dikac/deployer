@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
+console.log(process.env.INIT_CWD);
 const Fs = require('fs-extra');
 
 // Arguments
@@ -31,6 +32,8 @@ const [condition, source, destination] = program.args;
 
 const klawSync = require('klaw-sync');
 const root = process.env.INIT_CWD;
+
+console.log(root);
 
 
 const logUpdate = require('log-update');
