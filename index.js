@@ -2,6 +2,7 @@
 'use strict';
 
 console.log('process.env.INIT_CWD================================');
+console.log(process.argv);
 console.log(process.env.INIT_CWD);
 const Fs = require('fs-extra');
 
