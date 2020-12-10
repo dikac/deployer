@@ -13,6 +13,7 @@ program
     .command('condition', 'file/directory condition for deployment, deployment running if file does not exist')
     .command('source', 'directory source')
     .command('destination', 'directory destination')
+    .command('[remove]', 'directory to be removed')
     .parse(process.argv);
 
 program.args = program.args.map(argument=>{
@@ -25,7 +26,7 @@ program.args = program.args.map(argument=>{
     return argument;
 });
 
-const [condition, source, destination] = program.args;
+const [condition, source, destination, remove] = program.args;
 
 const klawSync = require('klaw-sync');
 const root = process.env.INIT_CWD;
@@ -114,10 +115,15 @@ if(!Fs.pathExistsSync(root + condition)) {
 
     } else {
 
+
         if(Fs.pathExistsSync(root + source)) {
 
             logUpdate(`cleaning up`);
             Fs.removeSync(root + source);
+
+            if(remove) {
+                Fs.removeSync(root + remove);
+            }
         }
 
         logUpdate('deployed');
