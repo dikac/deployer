@@ -9,12 +9,13 @@ const program = new commander.Command();
 
 program.storeOptionsAsProperties(false);
 
-program
-    .command('condition', 'file/directory condition for deployment, deployment running if file does not exist')
-    .command('source', 'directory source')
-    .command('destination', 'directory destination')
-    .command('[remove]', 'directory to be removed')
-    .parse(process.argv);
+program.arguments('<condition> <source> <destination> [remove]').description('deployer', {
+    condition : 'file/directory condition for deployment, deployment running if file does not exist',
+    source : 'directory source',
+    destination : 'directory destination',
+    remove : 'directory to be removed'
+
+}).parse(process.argv);
 
 program.args = program.args.map(argument=>{
 
@@ -27,6 +28,7 @@ program.args = program.args.map(argument=>{
 });
 
 const [condition, source, destination, remove] = program.args;
+
 
 const klawSync = require('klaw-sync');
 const root = process.env.INIT_CWD;
