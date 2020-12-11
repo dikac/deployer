@@ -1,6 +1,6 @@
 {
   "name": "@dikac/deployer",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "move directory on deployment",
   "main": "index.js",
   "dependencies": {
